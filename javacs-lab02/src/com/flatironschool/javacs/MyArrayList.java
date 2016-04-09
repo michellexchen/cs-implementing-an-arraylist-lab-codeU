@@ -62,7 +62,10 @@ public class MyArrayList<E> implements List<E> {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
 		}
-		// TODO: fill in the rest of this method
+		for (int x = size++; x > index; x--) {
+			array[x] = array[x-1];
+		}		
+		array[index] = element;
 	}
 
 	@Override
@@ -111,8 +114,12 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: fill in this method
-		return 0;
+		for (int x =0 ; x<size(); x++) {
+			if(target==null ? get(x)==null : target.equals(get(x))){
+				return x;
+			}
+		}
+		return -1;
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -182,8 +189,12 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill in this method.
-		return null;
+		E a = get(index);
+		for (int x = index; x<size-1; x++) {
+			array[x] = array[x+1];
+		}
+		size--;
+		return a;
 	}
 
 	@Override
@@ -202,8 +213,9 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public E set(int index, E element) {
-		// TODO: fill in this method.
-		return null;
+		E prev = get(index);
+		array[index] = element;
+		return prev;
 	}
 
 	@Override
